@@ -1,7 +1,7 @@
 <?php 
 require 'function/connection.php';
 
-$kategori = query("SELECT * FROM category");
+$book = query("SELECT * FROM books");
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +18,8 @@ $kategori = query("SELECT * FROM category");
     <header>
         <nav>
             <ul>
-                <a href="index.html" class="logo">Tsukareta</a>
-                <li><a href="index.html"><i class="fa fa-dashboard"></i> Home</a></li>
+                <a href="index.php" class="logo">Tsukareta</a>
+                <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="management.html" class="active"><i class="fa fa-male"></i> Management</a></li>
                 <li><a href="#"> <i class="fa fa-bar-chart-o"></i> About</a></li>
             </ul>
@@ -60,26 +60,8 @@ $kategori = query("SELECT * FROM category");
                 <div class="add">
                     <button class="add-button" id="myBtn">
                         Tambah Data
-                        <!-- <a href="#">Tambah Data</a> -->
                     </button>
-                    <div id="myModal" class="modal">
-
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <span class="close">&times;</span>
-                            <h2>Menambahkan data kategori</h2>
-                          </div>
-                          <div class="modal-body">
-                            <form action="function/simpan_kategori.php" method="POST">
-                                <input type="text" placeholder="Nama Kategori" name="nama_kategori" required>
-                                <input type="submit" value="simpan">
-                            </form>
-                          </div>
-                        </div>
-                      
-                      </div>
-                    <form action="">
+                    <form class="modal-form" action="">
                         <input type="text">
                         <input type="submit">
                     </form>
@@ -87,83 +69,30 @@ $kategori = query("SELECT * FROM category");
             <table id="table">
                 <tr>
                     <th>No</th>
-                    <th>Nama Kategori</th>
+                    <th>Nama Buku</th>
+                    <th>Penulis</th>
+                    <th>Tahun Perilisan</th>
+                    <th>Genre</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
                 <?php 
                 $i=1;
-                foreach ( $kategori as $kat_row ): 
+                foreach ( $book as $book_row ): 
                 ?>
                 <tr>
                     <td><?php echo $i++ ?></td>
-                    <td><?= $kat_row["category_name"]; ?></td>
-                    <td><a href="" class="edit">Edit</a> || <a href="" class="hapus">Hapus</a></td>
+                    <td><?= $book_row["title"]; ?></td>
+                    <td><?= $book_row["author"]; ?></td>
+                    <td><?= $book_row["published_year"]; ?></td>
+                    <td><?= $book_row["genre"]; ?></td>
+                    <td><?= $book_row["status"]; ?></td>
+                    <td>
+                        <a href="function/edit_book.php?id=<?= $book_row["id"] ?>" class="edit">Edit</a>|| 
+                        <a href="function/delete_book.php?id=<?= $book_row["id"] ?>" class="hapus">Hapus</a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
-            </table>
-            </div>
-
-            <br><br>
-
-            <div class="inner">
-                <h2>Daftar Kategori</h2>
-                <div class="add">
-                    <button class="add-button">
-                        <a href="#">Tambah Data</a>
-                    </button>
-                    <form action="">
-                        <input type="text">
-                        <input type="submit">
-                    </form>
-                </div>
-            <table id="table">
-                <tr>
-                    <th>No</th>
-                    <th>Kode Kategori</th>
-                    <th>Nama Kategori</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>K-0001</td>
-                    <td>Komputer</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>K-0002</td>
-                    <td>Matematika</td>
-                </tr>
-            </table>
-            </div>
-
-            <br><br>
-
-            <div class="inner">
-                <h2>Daftar Kategori</h2>
-                <div class="add">
-                    <button class="add-button">
-                        <a href="#">Tambah Data</a>
-                    </button>
-                    <form action="">
-                        <input type="text">
-                        <input type="submit">
-                    </form>
-                </div>
-            <table id="table">
-                <tr>
-                    <th>No</th>
-                    <th>Kode Kategori</th>
-                    <th>Nama Kategori</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>K-0001</td>
-                    <td>Komputer</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>K-0002</td>
-                    <td>Matematika</td>
-                </tr>
             </table>
             </div>
     </section>
@@ -176,5 +105,29 @@ $kategori = query("SELECT * FROM category");
     </main>
     <!-- Main Content -->
 </body>
+<!-- add modal -->
+<div id="myModal" class="modal">
+
+<!-- Modal content -->
+    <div class="modal-content">
+   
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Menambahkan data buku</h2>
+        </div>
+        
+        <div class="modal-body">
+            <form class="modal-form" action="function/insert_books.php" method="POST">
+                <input type="text" placeholder="Judul Buku" name="title" required>
+                <input type="text" placeholder="Penulis" name="author" required>
+                <input type="number" placeholder="Tahun Perilisan" name="published_year" required>
+                <input type="text" placeholder="genre" name="genre" required>
+                <input type="submit" value="simpan">
+            </form>
+        </div>
+    
+    </div>            
+</div>
+<!-- add modal -->
 <script src="scripts/script.js"></script>
 </html>

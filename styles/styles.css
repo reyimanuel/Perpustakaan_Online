@@ -266,6 +266,7 @@ li a:hover:not(.active) {
   /* Dashboard */
 
   /* management */
+
   /* card */
 .outer {
   padding: 5px;
@@ -291,6 +292,8 @@ li a:hover:not(.active) {
   padding: 5px;
 } 
   /* card */
+
+  /* add-modal */
 .add {
   display: flex;
   align-items: center;
@@ -322,27 +325,27 @@ li a:hover:not(.active) {
   background-color: #0056b3;
 }
 
-form {
+.modal-form {
   display: flex;
   align-items: center;
   margin: 0;
 }
 
-input[type="number"] {
+.modal-form input[type="number"] {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 10px;
 }
 
-input[type="text"] {
+.modal-form input[type="text"] {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 10px;
 }
 
-input[type="submit"] {
+.modal-form input[type="submit"] {
   padding: 10px 20px;
   background-color: #28a745;
   color: #fff;
@@ -352,7 +355,7 @@ input[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
+.modal-form input[type="submit"]:hover {
   background-color: #218838;
 }
 
@@ -383,6 +386,7 @@ input[type="submit"]:hover {
   color: white;
 }
 
+/* edit & hapus */
 .edit, .hapus {
   display: inline-block;
   padding: 8px 12px;
@@ -415,7 +419,76 @@ input[type="submit"]:hover {
   background-color: #c82333;
   border-color: #c82333;
 }
+/* edit & hapus */
 
+/* edit page */
+.edit-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-heading h1 {
+  font-size: 2em;
+  color: whitesmoke;
+}
+
+.edit-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.edit_book {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit_book input[type="text"],
+.edit_book input[type="number"],
+.edit_book select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.edit_book button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit_book button:hover {
+  background-color: #218838;
+}
+
+.edit-form a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #007bff;
+  padding: 10px 20px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-form a:hover {
+  background-color: #0056b3;
+  color: white;
+}
+/* edit page */
+
+/* edit page */
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
