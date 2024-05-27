@@ -63,7 +63,7 @@ $book = mysqli_fetch_assoc($result);
         </select><br>
         <button type="submit">Simpan</button>
     </form>
-    <a href="../management.php">Kembali</a>
+    <a href="../admin/management.php">Kembali</a>
 </div>
 </main>
 </body>

@@ -12,8 +12,8 @@
     <header>
         <nav>
             <ul>
-                <a href="index.html" class="logo">Tsukareta</a>
-                <li><a href="index.html" class="active"><i class="fa fa-dashboard"></i> Home</a></li>
+                <a href="dashboard.php" class="logo">Tsukareta</a>
+                <li><a href="dashboard.php" class="active"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="management.php"><i class="fa fa-male"></i> Management</a></li>
                 <li><a href="#"> <i class="fa fa-bar-chart-o"></i> About</a></li>
             </ul>

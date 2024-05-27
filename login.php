@@ -24,7 +24,7 @@ if (isset($_POST['login'])) {
 
     if (empty($err)) {
         $_SESSION['admin_username'] = $username;
-        header("Location: index.php");
+        header("Location: admin/dashboard.php");
         exit();
     }
 }

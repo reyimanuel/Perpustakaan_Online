@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO books (title, author, published_year, genre) VALUES ('$title', '$author', '$published_year', '$genre')";
 
     if (mysqli_query($conn, $sql)) {
-        header("Location: ../management.php");
+        header("Location: ../admin/management.php");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
