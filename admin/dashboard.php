@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Final Project</title>
 </head>
@@ -62,7 +62,7 @@
 
             <div class="card reveal">
                 <div class="dashboard-icon">
-                    <img src="images/book.png" alt="Buku" width="50" height="50">
+                    <img src="../images/book.png" alt="Buku" width="50" height="50">
                 </div>
                 <a href="buku.html">
                 <p>Buku</p>
@@ -71,7 +71,7 @@
 
             <div class="card reveal">
                 <div class="dashboard-icon">
-                    <img src="images/borrowing.png" alt="Peminjaman" width="50" height="50">
+                    <img src="../images/borrowing.png" alt="Peminjaman" width="50" height="50">
                 </div>
                 <a href="buku.html">
                 <p>Peminjaman</p>
@@ -80,7 +80,7 @@
 
             <div class="card reveal">
                 <div class="dashboard-icon">
-                    <img src="images/return.png" alt="return" width="50" height="50">
+                    <img src="../images/return.png" alt="return" width="50" height="50">
                 </div>
                 <a href="buku.html">
                 <p>Pengembalian</p>
@@ -89,7 +89,7 @@
 
             <div class="card reveal">
                 <div class="dashboard-icon">
-                    <img src="images/reader.png" alt="Pembaca" width="50" height="50">
+                    <img src="../images/reader.png" alt="Pembaca" width="50" height="50">
                 </div>
                 <a href="buku.html">
                 <p>Pengguna</p>

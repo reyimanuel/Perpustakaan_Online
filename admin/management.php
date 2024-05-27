@@ -10,7 +10,7 @@ $book = query("SELECT * FROM books");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -18,8 +18,8 @@ $book = query("SELECT * FROM books");
     <header>
         <nav>
             <ul>
-                <a href="index.php" class="logo">Tsukareta</a>
-                <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+                <a href="dashboard.php" class="logo">Tsukareta</a>
+                <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="management.html" class="active"><i class="fa fa-male"></i> Management</a></li>
                 <li><a href="#"> <i class="fa fa-bar-chart-o"></i> About</a></li>
             </ul>
