@@ -1,9 +1,19 @@
 <?php 
+include '../function/connection.php';
+
 session_start();
 
 if (!isset($_SESSION['login'])) {
   header("Location: ../index.php");
 }
+
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
+$query = "SELECT * FROM users WHERE username = '$username'";
+// $query = "SELECT title, borrow_date. return_date FROM borrowings JOIN books ON book_id = id WHERE user_id = $user_id ";
+$result = mysqli_query($conn, $query);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -11,24 +21,25 @@ if (!isset($_SESSION['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Final Project</title>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <header>
+       <!-- Navigation Bar -->
+       <header>
         <nav>
             <ul>
                 <a href="dashboard.php" class="logo">Tsukareta</a>
                 <li><a href="dashboard.php" class="active"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="management.php"><i class="fa fa-male"></i> Manajemen</a></li>
+                <li><a href="booklist.php"><i class="fa fa-male"></i> Daftar Buku</a></li>
                 <li><a href="#"> <i class="fa fa-bar-chart-o"></i> About</a></li>
             </ul>
         </nav>
     </header>
     <!-- Navigation Bar -->
 
+    <!-- Main Content -->
     <main class="index">
         <!-- Background -->
         <section class="wrapper-index"> 
@@ -50,7 +61,6 @@ if (!isset($_SESSION['login'])) {
         <!-- Main Content -->
         <section class="all-content">
           
-        <!-- Dropdown -->
           <div class="dropdown">
             <span class="fa fa-user-o"> User</span>
             <div class="dropdown-content">
@@ -61,12 +71,10 @@ if (!isset($_SESSION['login'])) {
           <div class="heading">
         <h1>Perpustakaan Online</h1>
           <p> 
-           Selamat datang User. Silahkan pilih menu yang tersedia untuk melihat informasi lebih lanjut.
+           Selamat datang <?php echo $_SESSION['username'] ?>. Silahkan pilih menu yang tersedia untuk melihat informasi lebih lanjut.
           </p>
       </div>
-      <!-- Dropdown -->
 
-        <!-- Dashboard Info -->
         <div class="dashboard-info">
 
             <div class="card reveal">
@@ -96,23 +104,10 @@ if (!isset($_SESSION['login'])) {
               </a>
             </div>
 
-            <div class="card reveal">
-                <div class="dashboard-icon">
-                    <img src="../images/reader.png" alt="Pembaca" width="50" height="50">
-                </div>
-                <a href="buku.html">
-                <p>Pengguna</p>
-              </a>
-            </div>
-        </div>
-        <!-- Dashboard Info -->
-        
-        <footer class="footer-container">
-           <p>Copyright &copy; 2024 all right reserved | Tsukareta</p>
-          </footer>
-          
+<footer class="footer-container">
+  <p>Copyright &copy; 2024 all right reserved | Tsukareta</p>
+</footer>
         </section>
-        <!-- Main Content -->
     </main>
 </body>
 </html>

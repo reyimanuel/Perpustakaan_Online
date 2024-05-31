@@ -1,37 +1,58 @@
 <?php 
+// Koneksi ke database
 session_start();
-if (isset($_SESSION['admin_username'])) {
-    header("Location: admin/dashboard.php");
+
+if (isset($_SESSION['login'])) {
+    if ($_SESSION['role'] == 'admin') {
+        header("Location: admin/dashboard.php");
+    } else {
+        header("Location: user/dashboard.php");
+    }
 }
 
-include 'function/connection.php';
-$username = "";
-$password = "";
-$err = "";
+include 'function/connection.php'; 
 
-
+// Mengambil data login
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
 
-    if ($username == "" && $password == "") {
-        $err = "<p>Silahkan masukan username dan password<p>";
-    }
-    if(empty($err)) {
-        $sql1 = "SELECT * FROM admin WHERE username='$username'";
-        $q1 = mysqli_query($conn, $sql1);
-        $r1 = mysqli_fetch_array($q1);
+    // Cek data login
+    $cek = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND password='$password'");
+    $countRow = mysqli_num_rows($cek);
 
-        if ($r1['password'] != md5($password)) {
-            $err = "<p>Username atau Password Salah<p>";
+    if ($countRow > 0) {
+        // Mengambil role user
+        $takeRole = mysqli_fetch_array($cek);
+        $role = $takeRole['role'];
+
+        $data = mysqli_fetch_assoc($cek);
+        $datUser_id = $data['user_id'];
+        $datRole = $data['role'];
+        $datEmail = $data['email'];
+        
+        $_SESSION['login'] = true;
+        $_SESSION['user_id'] = $datUser_id; // Simpan ID pengguna ke dalam session
+        $_SESSION['username'] = $username;
+        $_SESSION['role'] = $datRole;
+        $_SESSION['email'] = $datEmail;
+
+        // Jika role sebagai admin, maka akan diarahkan ke halaman admin
+        if ($role == 'admin') {
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $role;
+            header("Location: admin/dashboard.php");
+        } else {
+        // Jika role sebagai user, maka akan diarahkan ke halaman user
+            header("Location: user/dashboard.php");
+        }
+
+    } else {
+        if ($countRow == 0) {
+            $err = "Username atau Password Salah!";
         }
     }
 
-    if (empty($err)) {
-        $_SESSION['admin_username'] = $username;
-        header("Location: admin/dashboard.php");
-        exit();
-    }
 }
 
 ?>
@@ -65,14 +86,10 @@ if (isset($_POST['login'])) {
             <h1>Tsukareta</h1>
             <h2>Perpustakaan Online</h2>
             <h3>Silahkan Masukan Akun Anda</h3>
-            <?php 
-            if ($err) {
-                echo "<p class='error'>$err</p>";
-            }
-            ?>
+            <p class="error"><?php if (isset($err)) { echo $err; } ?></p>
             <form action="" method="POST">
                 <label for="username"> Username: </label>
-                <input type="text" value="<?php echo $username ?>" id="username" name="username" placeholder="Enter your Username" required>
+                <input type="text" id="username" name="username" placeholder="Enter your Username" required>
     
                 <label for="password"> Password: </label>
                 <input type="password" id="password" name="password" placeholder="Enter your Password" required>

@@ -5,10 +5,40 @@ session_start();
 
 if (!isset($_SESSION['login'])) {
   header("Location: ../index.php");
+  exit();
 }
 
+$username = $_SESSION['username'];
 
-$book = query("SELECT * FROM books");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $books_id = $_POST['books_id'];
+    $borrow_date = date('Y-m-d'); // Tanggal peminjaman saat ini
+
+    // Cek ketersediaan buku
+    $check_query = "SELECT status FROM books WHERE books_id = '$books_id'";
+    $check_result = mysqli_query($conn, $check_query);
+    $book = mysqli_fetch_assoc($check_result);
+
+    if ($book['status'] == 'tersedia') {
+        // Insert ke tabel borrowings
+        $insert_query = "INSERT INTO borrowings (username, books_id, borrow_date) VALUES ('$username', '$books_id', '$borrow_date')";
+        mysqli_query($conn, $insert_query);
+
+        // Update status buku
+        $update_query = "UPDATE books SET status = 'dipinjam' WHERE books_id = '$books_id'";
+        mysqli_query($conn, $update_query);
+
+        $message = "<p class=''success>Buku berhasil dipinjam!</p>";
+    } else {
+        $message = "<p class='error'>Buku tidak tersedia.</p>";
+    }
+}
+
+// Query untuk mengambil informasi buku
+$books_query = "SELECT * FROM books WHERE status = 'tersedia'";
+$books_result = mysqli_query($conn, $books_query);
+$borrowings_query = "SELECT * FROM borrowings";
+
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +62,8 @@ $book = query("SELECT * FROM books");
             </ul>
         </nav>
     </header>
- 
+   <!-- Main Content -->
    <main class="index">
-
     <!-- Background -->
     <section class="wrapper-management"> 
     <div class="box">
@@ -50,13 +79,8 @@ $book = query("SELECT * FROM books");
         <div></div>
     </div>
     </section>
-    <!-- Background -->
-
-    <!-- Main Content -->
     <section class="content">    
         <section class="outer">
-
-            <!-- Dropdown -->
             <div class="dropdown">
                 <span class="fa fa-user-o"> User</span>
                 <div class="dropdown-content">
@@ -66,27 +90,24 @@ $book = query("SELECT * FROM books");
             <div class="heading">
                 <h1>Manajemen Data</h1>
             </div>
-            <!-- Dropdown -->
-
+            
             <div class="inner">
                 <h2>Daftar Kategori</h2>
+            
+                <form class="borrow" method="POST" action="">
+                <?php if (!empty($message)) { echo "$message"; } ?>
+                    <label for="books_id">Pilih Buku:</label>
+                    <select name="books_id" id="books_id" required>
+                        <?php while ($book = mysqli_fetch_assoc($books_result)) { ?>
+                            <option value="<?php echo $book['books_id']; ?>"><?php echo htmlspecialchars($book['title']); ?></option>
+                        <?php } ?>
+                    </select>
+                    <button type="submit">Pinjam Buku</button>
+                </form>
 
-                <!-- Adding book -->
-                <div class="add">
-                    <button class="add-button" id="myBtn">
-                        Tambah Data
-                    </button>
-                    <form class="modal-form" action="">
-                        <input type="text">
-                        <input type="submit">
-                    </form>
-                </div>
-                <!-- Adding book -->
-
-                <!-- Table -->
             <table id="table">
                 <tr>
-                    <th>ID buku</th>
+                    <th>No</th>
                     <th>Nama Buku</th>
                     <th>Penulis</th>
                     <th>Tahun Perilisan</th>
@@ -95,37 +116,34 @@ $book = query("SELECT * FROM books");
                     <th>Aksi</th>
                 </tr>
                 <?php 
-                foreach ( $book as $book_row ): 
+                foreach ( $borrowings_query as $borrow_row ): 
                 ?>
                 <tr>
-                    <td><?= $book_row["books_id"]; ?></td>
-                    <td><?= $book_row["title"]; ?></td>
-                    <td><?= $book_row["author"]; ?></td>
-                    <td><?= $book_row["published_year"]; ?></td>
-                    <td><?= $book_row["genre"]; ?></td>
-                    <td><?= $book_row["status"]; ?></td>
+                    <td><?= $borrow_row["title"]; ?></td>
+                    <td><?= $borrow_row["author"]; ?></td>
+                    <td><?= $borrow_row["published_year"]; ?></td>
+                    <td><?= $borrow_row["genre"]; ?></td>
+                    <td><?= $borrow_row["status"]; ?></td>
                     <td>
-                        <a href="../function/edit_book.php?books_id=<?= $book_row["books_id"] ?>" class="edit">Edit</a> || 
-                        <a href="../function/delete_book.php?books_id=<?= $book_row["books_id"] ?>" class="hapus">Hapus</a>
+                        <div class="add">
+                            <button class="add-button" id="myBtn">
+                            Pinjam Buku
+                            </button>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </table>
-            <!-- Table -->
-
             </div>
     </section>
 
-    </section>
-    <!-- Main Content -->
-
-    <!-- Footer -->
     <footer class="footer-container">
         <p>Copyright &copy; 2024 all right reserved | Tsukareta</p>
-    </footer>
-    <!-- Footer -->
+      </footer>
 
+    </section>
     </main>
+    <!-- Main Content -->
 </body>
 <!-- add modal -->
 <div id="myModal" class="modal">
@@ -135,12 +153,11 @@ $book = query("SELECT * FROM books");
    
         <div class="modal-header">
             <span class="close">&times;</span>
-            <h2>Menambahkan data buku</h2>
+            <h2>Peminjaman Buku</h2>
         </div>
         
         <div class="modal-body">
             <form class="modal-form" action="../function/insert_books.php" method="POST">
-                <input type="text" placeholder="ID Buku" name="books_id" required>
                 <input type="text" placeholder="Judul Buku" name="title" required>
                 <input type="text" placeholder="Penulis" name="author" required>
                 <input type="number" placeholder="Tahun Perilisan" name="published_year" required>
