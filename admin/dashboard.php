@@ -1,9 +1,15 @@
 <?php 
+require '../function/connection.php';
+
 session_start();
 
 if (!isset($_SESSION['login'])) {
   header("Location: ../index.php");
 }
+
+$username = $_SESSION['username'];
+$query = "SELECT * FROM users WHERE username = '$username'";
+$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +58,7 @@ if (!isset($_SESSION['login'])) {
           
         <!-- Dropdown -->
           <div class="dropdown">
-            <span class="fa fa-user-o"> User</span>
+            <span class="fa fa-user-o"> <?php echo $_SESSION['username'] ?></span>
             <div class="dropdown-content">
             <a href="../function/logout.php">Logout</a>
             </div>
@@ -61,7 +67,7 @@ if (!isset($_SESSION['login'])) {
           <div class="heading">
         <h1>Perpustakaan Online</h1>
           <p> 
-           Selamat datang User. Silahkan pilih menu yang tersedia untuk melihat informasi lebih lanjut.
+           Selamat datang <?php echo $_SESSION['username'] ?>. Silahkan pilih menu yang tersedia untuk melihat informasi lebih lanjut.
           </p>
       </div>
       <!-- Dropdown -->

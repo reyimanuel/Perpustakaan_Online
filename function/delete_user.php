@@ -1,9 +1,9 @@
 <?php
 include 'connection.php';
 
-$id = $_GET['id'];
+$username = $_GET['username'];
 
-$sql = "DELETE FROM books WHERE id='$id'";
+$sql = "DELETE FROM users WHERE _sername='$username'";
 
 if (mysqli_query($conn, $sql)) {
     header("Location: ../admin/management.php");

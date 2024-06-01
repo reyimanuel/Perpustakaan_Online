@@ -104,7 +104,7 @@ ul {
   margin: 0;
   padding: 0;
   width: 15%;
-  background-color: rgba(0, 213, 255, 0.292);
+  background-color: rgba(34,67,117.6,50);
   position: fixed;
   height: 100%;
   overflow: auto;
@@ -125,7 +125,7 @@ ul {
 li a {
   font-size: 20px;
   display: block;
-  color: #000;
+  color: rgb(0, 0, 0);
   padding: 12px 20px 12px 20px;
   text-decoration: none;
   font-weight: 600;
@@ -288,32 +288,42 @@ li a:hover:not(.active) {
 .borrow {
   margin-top: 20px;
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #394867;
   width: 500px;
   margin-left: 30%;
   margin-right: 50%;
+  margin-bottom: 30px;
 }
 
 .borrow label {
   display: block;
   margin-bottom: 10px;
+  color: whitesmoke;
+  font-weight: 900;
+  font-size: 20px;
+  
 }
 
 .borrow select {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
+  background-color: #9BA4B5;
+  color: whitesmoke;
+  font-weight: 500;
+  font-size: 15px;
 }
 
-.borrow button {
+.borrow input {
   padding: 8px 20px;
-  background-color: #007bff;
+  background-color: #212A3E;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
 }
 
 .borrow button:hover {

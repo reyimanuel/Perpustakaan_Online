@@ -11,11 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $genre = $_POST['genre'];
     $status = $_POST['status'];
 
-    $check_query = "SELECT * FROM books WHERE books_id='$new_books_id'";
-    $check_result = mysqli_query($conn, $check_query);
-    if (mysqli_num_rows($check_result) > 0) {
-        $err ="ID Buku sudah digunakan.";
-    }else {
         $sql = "UPDATE books SET books_id = '$new_books_id', title='$title', author='$author', published_year='$published_year', genre='$genre', status='$status' WHERE books_id='$books_id'";
 
         if (mysqli_query($conn, $sql)) {
@@ -23,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-    }
 }
 
 $result = mysqli_query($conn, "SELECT * FROM books WHERE books_id='$books_id'");

@@ -7,8 +7,13 @@ if (!isset($_SESSION['login'])) {
   header("Location: ../index.php");
 }
 
+$username = $_SESSION['username'];
+$query = "SELECT * FROM users WHERE username = '$username'";
+$result = mysqli_query($conn, $query);
 
 $book = query("SELECT * FROM books");
+$borrowings = query("SELECT * FROM borrowings");
+$users = query("SELECT * FROM users");
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +63,7 @@ $book = query("SELECT * FROM books");
 
             <!-- Dropdown -->
             <div class="dropdown">
-                <span class="fa fa-user-o"> User</span>
+                <span class="fa fa-user-o">  <?php echo $_SESSION['username'] ?></span>
                 <div class="dropdown-content">
                 <a href="../function/logout.php">Logout</a>
                 </div>
@@ -69,7 +74,7 @@ $book = query("SELECT * FROM books");
             <!-- Dropdown -->
 
             <div class="inner">
-                <h2>Daftar Kategori</h2>
+                <h2>Daftar Buku</h2>
 
                 <!-- Adding book -->
                 <div class="add">
@@ -107,6 +112,61 @@ $book = query("SELECT * FROM books");
                     <td>
                         <a href="../function/edit_book.php?books_id=<?= $book_row["books_id"] ?>" class="edit">Edit</a> || 
                         <a href="../function/delete_book.php?books_id=<?= $book_row["books_id"] ?>" class="hapus">Hapus</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+            <!-- Table -->
+
+            <h2>Daftar Peminjaman</h2>
+            <!-- Table -->
+            <table id="table">
+                <tr>
+                    <th>ID buku</th>
+                    <th>Nama Buku</th>
+                    <th>Tanggal Peminjaman</th>
+                    <th>Tanggal Pengembalian</th>
+                    <th>Pengguna</th>
+                    <th>Aksi</th>
+                </tr>
+                
+                <?php 
+                foreach ( $borrowings as $borrow_row ): 
+                ?>
+                
+                <tr>
+                    <td><?= $borrow_row["books_id"]; ?></td>
+                    <td><?= $borrow_row["title"]; ?></td>
+                    <td><?= $borrow_row["borrow_date"]; ?></td>
+                    <td><?= $borrow_row["return_date"]; ?></td>
+                    <td><?= $borrow_row["username"]; ?></td>
+                    <td>
+                        <a href="../function/delete_borrowing.php?borrowings_id=<?= $borrow_row["borrowings_id"] ?>" class="hapus">Hapus</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+            <!-- Table -->
+
+            <h2>Daftar Pengguna</h2>
+            <!-- Table -->
+            <table id="table">
+                <tr>
+                    <th>username</th>
+                    <th>role</th>
+                    <th>email</th>
+                    <th>Aksi</th>
+                </tr>
+                <?php 
+                foreach ( $users as $usr_row ): 
+                ?>
+                <tr>
+                    <td><?= $usr_row["username"]; ?></td>
+                    <td><?= $usr_row["role"]; ?></td>
+                    <td><?= $usr_row["email"]; ?></td>
+                    <td>
+                        <a href="../function/edit_user.php?username=<?= $usr_row["username"] ?>" class="edit">Edit</a> || 
+                        <a href="../function/delete_user.php?username=<?= $usr_row["username"] ?>" class="hapus">Hapus</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

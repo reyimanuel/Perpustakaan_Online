@@ -8,9 +8,7 @@ if (!isset($_SESSION['login'])) {
 }
 
 $username = $_SESSION['username'];
-$email = $_SESSION['email'];
 $query = "SELECT * FROM users WHERE username = '$username'";
-// $query = "SELECT title, borrow_date. return_date FROM borrowings JOIN books ON book_id = id WHERE user_id = $user_id ";
 $result = mysqli_query($conn, $query);
 
 
@@ -32,7 +30,7 @@ $result = mysqli_query($conn, $query);
             <ul>
                 <a href="dashboard.php" class="logo">Tsukareta</a>
                 <li><a href="dashboard.php" class="active"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="booklist.php"><i class="fa fa-male"></i> Daftar Buku</a></li>
+                <li><a href="booklist.php"><i class="fa fa-male"></i> Peminjaman</a></li>
                 <li><a href="#"> <i class="fa fa-bar-chart-o"></i> About</a></li>
             </ul>
         </nav>
@@ -62,7 +60,7 @@ $result = mysqli_query($conn, $query);
         <section class="all-content">
           
           <div class="dropdown">
-            <span class="fa fa-user-o"> User</span>
+            <span class="fa fa-user-o"> <?php echo $_SESSION['username'] ?></span>
             <div class="dropdown-content">
             <a href="../function/logout.php">Logout</a>
             </div>
