@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -59,9 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </nav>
     </header>
    <!-- Main Content -->
-   <main class="index">
+   <main class="dashboard">
     <!-- Background -->
-    <section class="wrapper-management"> 
+    <section class="wrapper-booklist"> 
     <div class="box">
         <div></div>
         <div></div>
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <section class="content">    
         <section class="outer">
             <div class="dropdown">
-                <span class="fa fa-user-o"> User</span>
+                <span class="fa fa-user-o"> <?php echo $_SESSION['username'] ?></span>
                 <div class="dropdown-content">
                 <a href="../function/logout.php">Logout</a>
                 </div>

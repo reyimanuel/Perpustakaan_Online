@@ -1,3 +1,21 @@
+
+// Login & Register
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('container');
+  const registerBtn = document.getElementById('signup');
+  const loginBtn = document.getElementById('signin');
+
+  registerBtn.addEventListener('click', () => {
+      container.classList.add("active");
+  });
+
+  loginBtn.addEventListener('click', () => {
+      container.classList.remove("active");
+  });
+});
+
+
+// Modal
 var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
@@ -21,4 +39,4 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+};

@@ -20,7 +20,7 @@ $result = mysqli_query($conn, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -38,9 +38,9 @@ $result = mysqli_query($conn, $query);
     <!-- Navigation Bar -->
 
     <!-- Main Content -->
-    <main class="index">
+    <main class="dashboard">
         <!-- Background -->
-        <section class="wrapper-index"> 
+        <section class="wrapper-dashboard"> 
         <div class="box">
             <div></div>
             <div></div>
