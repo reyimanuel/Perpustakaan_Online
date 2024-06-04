@@ -9,7 +9,7 @@ if (isset($_SESSION['login'])) {
     }
 }
 
-include '../function/connection.php'; 
+include 'function/connection.php'; 
 
 // Mengambil data login
 if (isset($_POST['login'])) {
@@ -59,7 +59,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <title>Register/Login</title>
 </head>
 <body>
@@ -76,11 +76,11 @@ if (isset($_POST['login'])) {
         </form>
     </div>
     <div class="form-container sign-in">
-        <form>
+        <form action="" method="POST">
             <h1>Sign In</h1>
             <span>Enter your credential</span>
-            <input type="username" id="username" name="username" placeholder="Username" required>
-            <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+                <input type="password" id="password" name="password" placeholder="Enter your Password" required>
             <a href="#">Forgot Your Password?</a>
             <button type="submit" name="login" value="Masuk Ke Sistem">Sign In</button>
         </form>
