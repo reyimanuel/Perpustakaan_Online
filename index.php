@@ -10,7 +10,7 @@ if (isset($_SESSION['login'])) {
 }
 
 include 'function/connection.php'; 
-
+$messages = "";
 // Mengambil data login
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
@@ -47,13 +47,12 @@ if (isset($_POST['login'])) {
 
     } else {
         if ($countRow == 0) {
-            $err = "Username atau Password Salah!";
+            $messages .= "<div class='alert-danger'>Username atau Password Salah!</div>";
         }
     }
 
 }
 
-$messages = "";
 if (isset($_POST["submit"])) {
     $fullName = $_POST["fullname"];
     $usname = $_POST["usname"];
@@ -96,7 +95,7 @@ if (isset($_POST["submit"])) {
             $messages .= "<div class='alert-danger'>$error</div>";
         }
     } else {
-        $sql = "INSERT INTO users (username, name, email, password) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, name, email, password, role) VALUES (?, ?, ?, ?, 'user')";
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             die("Something went wrong");
         } else {
@@ -136,7 +135,6 @@ if (isset($_POST["submit"])) {
             <h1>Sign In</h1>
             <span>Enter your credential</span>
             <?php echo $messages; ?>
-            <p class="error"><?php if (isset($err)) { echo $err; } ?></p>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
             <a href="#">Forgot Your Password?</a>

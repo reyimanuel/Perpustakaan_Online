@@ -3,7 +3,7 @@ include 'connection.php';
 
 $username = $_GET['username'];
 
-$sql = "DELETE FROM users WHERE _sername='$username'";
+$sql = "DELETE FROM users WHERE username='$username'";
 
 if (mysqli_query($conn, $sql)) {
     header("Location: ../admin/management.php");

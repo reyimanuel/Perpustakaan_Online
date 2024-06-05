@@ -81,10 +81,6 @@ $users = query("SELECT * FROM users");
                     <button class="add-button" id="myBtn">
                         Tambah Data
                     </button>
-                    <form class="modal-form" action="">
-                        <input type="text">
-                        <input type="submit">
-                    </form>
                 </div>
                 <!-- Adding book -->
 
@@ -152,20 +148,22 @@ $users = query("SELECT * FROM users");
             <!-- Table -->
             <table id="table">
                 <tr>
-                    <th>username</th>
-                    <th>role</th>
-                    <th>email</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Email</th>
                     <th>Aksi</th>
                 </tr>
                 <?php 
                 foreach ( $users as $usr_row ): 
                 ?>
                 <tr>
+                    <td><?= $usr_row["name"]; ?></td>
                     <td><?= $usr_row["username"]; ?></td>
                     <td><?= $usr_row["role"]; ?></td>
                     <td><?= $usr_row["email"]; ?></td>
                     <td>
-                        <a href="../function/edit_user.php?username=<?= $usr_row["username"] ?>" class="edit">Edit</a> || 
+                        <a href="../function/edit_role.php?username=<?= $usr_row["username"] ?>" class="edit">Edit</a> || 
                         <a href="../function/delete_user.php?username=<?= $usr_row["username"] ?>" class="hapus">Hapus</a>
                     </td>
                 </tr>

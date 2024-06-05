@@ -11,24 +11,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $genre = $_POST['genre'];
     $status = $_POST['status'];
 
-        $sql = "UPDATE books SET books_id = '$new_books_id', title='$title', author='$author', published_year='$published_year', genre='$genre', status='$status' WHERE books_id='$books_id'";
+    // Check if the new books_id already exists
+    $check_sql = "SELECT * FROM books WHERE books_id = '$new_books_id' AND books_id != '$books_id'";
+    $check_result = mysqli_query($conn, $check_sql);
+
+    if (mysqli_num_rows($check_result) > 0) {
+        $err = "ID Buku telah tersedia, Gunakan yang lain!";
+    } else {
+        $sql = "UPDATE books SET books_id = '$new_books_id', title = '$title', author = '$author', published_year = '$published_year', genre = '$genre', status = '$status' WHERE books_id = '$books_id'";
 
         if (mysqli_query($conn, $sql)) {
             header("Location: ../admin/management.php");
+            exit;
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
+    }
 }
 
-$result = mysqli_query($conn, "SELECT * FROM books WHERE books_id='$books_id'");
+$result = mysqli_query($conn, "SELECT * FROM books WHERE books_id = '$books_id'");
 $book = mysqli_fetch_assoc($result);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Buku</title>
     <link rel="stylesheet" href="../styles/admin.css">
 </head>
 <body>
@@ -44,9 +54,8 @@ $book = mysqli_fetch_assoc($result);
         <div></div>
         <div></div>
         <div></div>
-        <div></div>
     </div>
-    </section>
+</section>
 <div class="edit-heading">
 <h1>Edit Buku</h1>
 </div>
