@@ -190,3 +190,23 @@ body {
 .container.active .toggle-right {
   transform: translateX(200%);
 }
+
+.alert-danger, .alert-success {
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.alert-danger {
+  background-color: #e60b0b;
+  border: 1px solid #e60b0b;
+  color: whitesmoke;
+}
+
+.alert-success {
+  background-color: #65f721;
+  border: 1px solid #65f721;
+  color: whitesmoke;
+}

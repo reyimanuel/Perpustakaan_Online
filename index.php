@@ -53,6 +53,7 @@ if (isset($_POST['login'])) {
 
 }
 
+$messages = "";
 if (isset($_POST["submit"])) {
     $fullName = $_POST["fullname"];
     $usname = $_POST["usname"];
@@ -92,7 +93,7 @@ if (isset($_POST["submit"])) {
 
     if (count($errors) > 0) {
         foreach ($errors as $error) {
-            echo "<div class='alert alert-danger'>$error</div>";
+            $messages .= "<div class='alert-danger'>$error</div>";
         }
     } else {
         $sql = "INSERT INTO users (username, name, email, password) VALUES (?, ?, ?, ?)";
@@ -101,7 +102,7 @@ if (isset($_POST["submit"])) {
         } else {
             mysqli_stmt_bind_param($stmt, "ssss", $usname, $fullName, $email, $passwordHash);
             mysqli_stmt_execute($stmt);
-            echo "<div class='alert alert-success'>You are registered successfully.</div>";
+            $messages .= "<div class='alert-success'>You are registered successfully.</div>";
         }
     }
 }
@@ -134,6 +135,7 @@ if (isset($_POST["submit"])) {
         <form action="" method="POST">
             <h1>Sign In</h1>
             <span>Enter your credential</span>
+            <?php echo $messages; ?>
             <p class="error"><?php if (isset($err)) { echo $err; } ?></p>
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
