@@ -14,43 +14,37 @@ $messages = "";
 // Mengambil data login
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
 
     // Cek data login
-    $cek = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND password='$password'");
-    $countRow = mysqli_num_rows($cek);
-
-    if ($countRow > 0) {
-        // Mengambil role user
-        $takeRole = mysqli_fetch_array($cek);
-        $role = $takeRole['role'];
-
+    $cek = mysqli_query($conn, "SELECT * FROM users WHERE username='$username'");
+    if ($cek && mysqli_num_rows($cek) > 0) {
         $data = mysqli_fetch_assoc($cek);
-        $datUser_id = $data['user_id'];
-        $datRole = $data['role'];
-        $datEmail = $data['email'];
-        
-        $_SESSION['login'] = true;
-        $_SESSION['username'] = $username;
-        $_SESSION['role'] = $datRole;
-        $_SESSION['email'] = $datEmail;
 
-        // Jika role sebagai admin, maka akan diarahkan ke halaman admin
-        if ($role == 'admin') {
+        if (password_verify($password, $data['password'])) {
+            // Mengambil role user
+            $datUser_id = $data['user_id'];
+            $datRole = $data['role'];
+            $datEmail = $data['email'];
+            
+            $_SESSION['login'] = true;
             $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
-            header("Location: admin/dashboard.php");
-        } else {
-        // Jika role sebagai user, maka akan diarahkan ke halaman user
-            header("Location: user/dashboard.php");
-        }
+            $_SESSION['role'] = $datRole;
+            $_SESSION['email'] = $datEmail;
 
-    } else {
-        if ($countRow == 0) {
+            // Jika role sebagai admin, maka akan diarahkan ke halaman admin
+            if ($datRole == 'admin') {
+                header("Location: admin/dashboard.php");
+            } else {
+                // Jika role sebagai user, maka akan diarahkan ke halaman user
+                header("Location: user/dashboard.php");
+            }
+        } else {
             $messages .= "<div class='alert-danger'>Username atau Password Salah!</div>";
         }
+    } else {
+        $messages .= "<div class='alert-danger'>Username atau Password Salah!</div>";
     }
-
 }
 
 if (isset($_POST["submit"])) {
@@ -60,21 +54,21 @@ if (isset($_POST["submit"])) {
     $password = $_POST["pswrd"];
     $passwordRepeat = $_POST["repeat_pswrd"];
     
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    $passwordmd5 = password_hash($password, PASSWORD_DEFAULT);
 
     $errors = array();
     
     if (empty($fullName) || empty($usname) || empty($email) || empty($password) || empty($passwordRepeat)) {
-        array_push($errors, "All fields are required");
+        array_push($errors, "Semua kolom harus diisi!");
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        array_push($errors, "Email is not valid");
+        array_push($errors, "Email tidak valid!");
     }
     if (strlen($password) < 4) {
-        array_push($errors, "Password must be at least 4 characters long");
+        array_push($errors, "Password setidaknya harus 4 karakter!");
     }
     if ($password !== $passwordRepeat) {
-        array_push($errors, "Passwords do not match");
+        array_push($errors, "Password tidak sama!");
     }
     
     $sql = "SELECT * FROM users WHERE email = ?";
@@ -86,7 +80,7 @@ if (isset($_POST["submit"])) {
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         if (mysqli_num_rows($result) > 0) {
-            array_push($errors, "Email already exists!");
+            array_push($errors, "Email sudah ada!");
         }
     }
 
@@ -99,9 +93,9 @@ if (isset($_POST["submit"])) {
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             die("Something went wrong");
         } else {
-            mysqli_stmt_bind_param($stmt, "ssss", $usname, $fullName, $email, $passwordHash);
+            mysqli_stmt_bind_param($stmt, "ssss", $usname, $fullName, $email, $passwordmd5);
             mysqli_stmt_execute($stmt);
-            $messages .= "<div class='alert-success'>You are registered successfully.</div>";
+            $messages .= "<div class='alert-success'>Akun kamu berhasil teregistrasi.</div>";
         }
     }
 }
