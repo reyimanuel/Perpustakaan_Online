@@ -39,7 +39,7 @@ $book = mysqli_fetch_assoc($result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Buku</title>
-    <link rel="stylesheet" href="../styles/admin.css">
+    <link rel="stylesheet" href="../styles/edit.css">
 </head>
 <body>
 <main>
@@ -56,11 +56,11 @@ $book = mysqli_fetch_assoc($result);
         <div></div>
     </div>
 </section>
+
+<div class="edit-form">
 <div class="edit-heading">
 <h1>Edit Buku</h1>
 </div>
-
-<div class="edit-form">
 <form class="edit_book" method="POST" action="">
         <p class="error"><?php if (isset($err)) { echo $err; } ?></p>
         ID Buku: <input type="text" name="new_books_id" value="<?php echo $book['books_id']; ?>" required><br>
@@ -75,7 +75,7 @@ $book = mysqli_fetch_assoc($result);
         </select><br>
         <button type="submit">Simpan</button>
     </form>
-    <a href="../admin/management.php">Kembali</a>
+    <a href="../admin/book_management.php">Kembali</a>
 </div>
 </main>
 </body>

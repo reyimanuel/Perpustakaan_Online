@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO books (books_id, title, author, published_year, genre) VALUES ('$books_id','$title', '$author', '$published_year', '$genre')";
     
     if (mysqli_query($conn, $sql)) {
-        header("Location: ../admin/management.php");
+        header("Location: ../admin/book_management.php");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }

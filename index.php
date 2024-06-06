@@ -54,7 +54,7 @@ if (isset($_POST["submit"])) {
     $password = $_POST["pswrd"];
     $passwordRepeat = $_POST["repeat_pswrd"];
     
-    $passwordmd5 = password_hash($password, PASSWORD_DEFAULT);
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     $errors = array();
     
@@ -93,7 +93,7 @@ if (isset($_POST["submit"])) {
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             die("Something went wrong");
         } else {
-            mysqli_stmt_bind_param($stmt, "ssss", $usname, $fullName, $email, $passwordmd5);
+            mysqli_stmt_bind_param($stmt, "ssss", $usname, $fullName, $email, $password_hash);
             mysqli_stmt_execute($stmt);
             $messages .= "<div class='alert-success'>Akun kamu berhasil teregistrasi.</div>";
         }

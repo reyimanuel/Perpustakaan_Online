@@ -23,8 +23,8 @@ $user = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../styles/admin.css">
+    <title>Edit Role</title>
+    <link rel="stylesheet" href="../styles/edit.css">
 </head>
 <body>
 <main>
@@ -42,11 +42,10 @@ $user = mysqli_fetch_assoc($result);
         <div></div>
     </div>
     </section>
-<div class="edit-heading">
-<h1>Edit Buku</h1>
-</div>
-
 <div class="edit-form">
+    <div class="edit-heading">
+        <h1>Edit Role</h1>
+    </div>
 <form class="edit_book" method="POST" action="">
         <p class="error"><?php if (isset($err)) { echo $err; } ?></p>
         Role: 
@@ -56,7 +55,7 @@ $user = mysqli_fetch_assoc($result);
         </select><br>
         <button type="submit">Simpan</button>
     </form>
-    <a href="../admin/management.php">Kembali</a>
+    <a href="../admin/user_management.php">Kembali</a>
 </div>
 </main>
 </body>
