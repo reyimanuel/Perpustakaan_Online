@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2024 at 02:24 AM
--- Server version: 10.4.32-MariaDB
+-- Generation Time: Jun 06, 2024 at 05:54 PM
+-- Server version: 10.11.2-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -71,12 +71,10 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`books_id`, `title`, `author`, `published_year`, `genre`, `status`) VALUES
-('A001', 'touche', 'Windhy Puspitadewi', 2011, 'teenlit', 'dipinjam'),
-('A002', 'touche#2', 'Windhy Puspitadewi', 2014, 'teenlit', 'dipinjam'),
-('A003', 'touche#3', 'Windhy Puspitadewi', 2017, 'teenlit', 'dipinjam'),
-('B001', 'Bumi', 'Tere Liye', 2014, 'Fantasi', 'tersedia'),
-('B002', 'Bulan', 'Tere Liye', 2015, 'Fantasi', 'dipinjam'),
-('B003', 'Matahari', 'Tere Liye', 2016, 'Fantasi', 'dipinjam');
+('A001', 'touche', 'Windhy Puspitadewi', 2011, 'teenlit', 'tersedia'),
+('A002', 'touche#2', 'Windhy Puspitadewi', 2014, 'teenlit', 'tersedia'),
+('A003', 'touche#3', 'Windhy Puspitadewi', 2017, 'teenlit', 'tersedia'),
+('B001', 'Bumi', 'Tere Liye', 2014, 'Fantasi', 'tersedia');
 
 -- --------------------------------------------------------
 
@@ -93,17 +91,6 @@ CREATE TABLE `borrowings` (
   `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `borrowings`
---
-
-INSERT INTO `borrowings` (`borrowings_id`, `borrow_date`, `return_date`, `username`, `books_id`, `title`) VALUES
-(24, '2024-06-02', '2024-06-16', 'marlin', 'A001', 'touche'),
-(25, '2024-06-02', '2024-06-16', 'marlin', 'A002', 'touche#2'),
-(26, '2024-06-02', '2024-06-16', 'veronica', 'A003', 'touche#3'),
-(28, '2024-06-02', '2024-06-16', 'marlin', 'B002', 'Bulan'),
-(29, '2024-06-02', '2024-06-16', 'veronica', 'B003', 'Matahari');
-
 -- --------------------------------------------------------
 
 --
@@ -112,6 +99,7 @@ INSERT INTO `borrowings` (`borrowings_id`, `borrow_date`, `return_date`, `userna
 
 CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
+  `name` text NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(10) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL
@@ -121,10 +109,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`username`, `password`, `role`, `email`) VALUES
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'administrator@admin.com'),
-('marlin', '5045a8bf1d18894bb7ad47c08f95c22c', 'user', 'marlin@user.com'),
-('veronica', 'f769a4ee2a3651d2abedabcf543e59c9', 'user', 'veronica@user.com');
+INSERT INTO `users` (`username`, `name`, `password`, `role`, `email`) VALUES
+('admin', 'Administrator', '$2y$10$hJiAhMbfgUcNLyw46cXjfuHKrgpBR24PPI8ZBB57CTi6pkizEx8S.', 'admin', 'administrator@admin.com'),
+('Ica', 'Veronica Waeo', '$2y$10$f26dNUWBqmRf7LH1DN1vKur6UD/h7b7TLa.sqd6dfNFWALWbC99Se', 'user', 'veronica@example.com'),
+('Marlin', 'Marlin Pasanda', '$2y$10$21YQLY4OaC0aXQEKIrfJceMBjEMXTmnIbxK30HFur1SeuqqB3Usze', 'user', 'marlin@example.com'),
+('wanda', 'Wanda Pantouw', '$2y$10$H6CUOQ0puLEfy6j6XkfiZO0B.ovsoKMYjNp/Trk4GyBUd.bIKDRCW', 'user', 'wanda@example.com');
 
 --
 -- Indexes for dumped tables
@@ -158,7 +147,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `borrowings`
 --
 ALTER TABLE `borrowings`
-  MODIFY `borrowings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `borrowings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
