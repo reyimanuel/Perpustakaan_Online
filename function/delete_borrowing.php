@@ -6,7 +6,7 @@ $id = $_GET['borrowings_id'];
 $sql = "DELETE FROM borrowings WHERE borrowings_id='$id'";
 
 if (mysqli_query($conn, $sql)) {
-    header("Location: ../admin/management.php");
+    header("Location: ../admin/borrowing_management.php");
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

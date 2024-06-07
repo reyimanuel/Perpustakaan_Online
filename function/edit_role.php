@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "UPDATE users SET role = '$role' WHERE username='$username'";
 
         if (mysqli_query($conn, $sql)) {
-            header("Location: ../admin/management.php");
+            header("Location: ../admin/user_management.php");
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }

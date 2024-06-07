@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "UPDATE books SET books_id = '$new_books_id', title = '$title', author = '$author', published_year = '$published_year', genre = '$genre', status = '$status' WHERE books_id = '$books_id'";
 
         if (mysqli_query($conn, $sql)) {
-            header("Location: ../admin/management.php");
+            header("Location: ../admin/book_management.php");
             exit;
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);

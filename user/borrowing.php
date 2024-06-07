@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = "UPDATE books SET status = 'dipinjam' WHERE books_id = '$books_id'";
     mysqli_query($conn, $query);
 
-    header("Location: booklist.php");
+    header("Location: borrowing.php");
     exit;
 }
     $query_borrowings = "SELECT * FROM borrowings WHERE username = '$username'";
