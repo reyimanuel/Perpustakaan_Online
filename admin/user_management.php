@@ -51,6 +51,7 @@ $users = query("SELECT * FROM users");
         <a href="book_management.php">Manajemen Buku</a>
         <a href="borrowing_management.php">Manajemen Peminjaman</a>
         <a href="user_management.php" class="active">Manajemen Pengguna</a>
+        <a href="about.html">Designer! </a>
     </nav>
 
 

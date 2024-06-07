@@ -81,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <a href="dashboard.php">Dashboard</a>
         <a href="book_list.php">Daftar Buku</a>
         <a href="borrowing.php" class="active">Peminjaman Buku</a>
+        <a href="about.html">Designer! </a>
     </nav>
 
 

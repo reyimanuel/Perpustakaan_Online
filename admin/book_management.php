@@ -51,6 +51,7 @@ $book = query("SELECT * FROM books");
         <a href="book_management.php" class="active">Manajemen Buku</a>
         <a href="borrowing_management.php">Manajemen Peminjaman</a>
         <a href="user_management.php">Manajemen Pengguna</a>
+        <a href="../about.html">Designer!</a>
     </nav>
 
 

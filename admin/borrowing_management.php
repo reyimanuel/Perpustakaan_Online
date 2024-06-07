@@ -51,6 +51,7 @@ $borrowings = query("SELECT * FROM borrowings");
         <a href="book_management.php">Manajemen Buku</a>
         <a href="borrowing_management.php" class="active">Manajemen Peminjaman</a>
         <a href="user_management.php">Manajemen Pengguna</a>
+        <a href="about.html">Designer! </a>
     </nav>
 
 

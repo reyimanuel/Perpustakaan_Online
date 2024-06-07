@@ -50,6 +50,7 @@ $book = query("SELECT * FROM books");
         <a href="dashboard.php">Dashboard</a>
         <a href="book_list.php" class="active">Daftar Buku</a>
         <a href="borrowing.php">Peminjaman Buku</a>
+        <a href="about.html">Designer! </a>
     </nav>
 
 
