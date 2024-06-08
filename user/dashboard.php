@@ -52,7 +52,7 @@ $book = query("SELECT * FROM books limit 0, 5");
         <a href="dashboard.php" class="active">Dashboard</a>
         <a href="book_list.php">Daftar Buku</a>
         <a href="borrowing.php">Peminjaman Buku</a>
-        <a href="about.html">Designer! </a>
+        <a href="about.php">Designer! </a>
     </nav>
 
     <div class="main-body">

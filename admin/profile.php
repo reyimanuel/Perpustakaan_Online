@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['message'] = "Error updating profile: " . mysqli_error($conn);
     }
 
-    header("Location: profile_update.php");
+    header("Location: dashboard.php");
     exit;
 }
 ?>
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Buku</title>
+    <title>Edit Profile</title>
     <link rel="stylesheet" href="../styles/profile.css">
 </head>
 <body>
@@ -54,8 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div></div>
     </div>
 </section>
-
-    <div class="profile-form">
+    <div class="edit-form">
         <div class="edit-heading">
             <h1>Profile</h1>
         </div>
@@ -64,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <p><?php echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
         <?php endif; ?>
 
-        <form class="update-profile" action="profile_update.php" method="POST">
+        <form class="update" action="profile.php" method="POST">
             <label for="name">Name:</label>
                 <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
 
@@ -74,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="submit" value="Update Profile">
         </form>
     <a href="dashboard.php">Kembali</a>
-    </div>
+</div>
 </main>
 </body>
 </html>

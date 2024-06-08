@@ -54,7 +54,7 @@ $users = query("SELECT * FROM users limit 0, 5");
         <a href="book_management.php">Manajemen Buku</a>
         <a href="borrowing_management.php">Manajemen Peminjaman</a>
         <a href="user_management.php">Manajemen Pengguna</a>
-        <a href="about.html">Designer! </a>
+        <a href="about.php">Designer! </a>
     </nav>
 
     <div class="main-body">

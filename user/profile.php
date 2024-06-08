@@ -55,14 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </section>
 <nav>
-      <div class="side_navbar">
-        <span>Main Menu</span>
-        <a href="dashboard.php">Dashboard</a>
-        <a href="book_list.php" class="active">Daftar Buku</a>
-        <a href="borrowing.php">Peminjaman Buku</a>
-        <a href="about.html">Designer! </a>
-    </nav>
-
     <div class="edit-form">
         <div class="edit-heading">
             <h1>Profile</h1>

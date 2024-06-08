@@ -48,10 +48,10 @@ $book = query("SELECT * FROM books");
       <div class="side_navbar">
         <span>Main Menu</span>
         <a href="dashboard.php">Dashboard</a>
-        <a href="book_management.php" class="active">Manajemen Buku</a>
+        <a href="book_management.php"  class="active">Manajemen Buku</a>
         <a href="borrowing_management.php">Manajemen Peminjaman</a>
         <a href="user_management.php">Manajemen Pengguna</a>
-        <a href="../about.html">Designer!</a>
+        <a href="about.php">Designer! </a>
     </nav>
 
 
